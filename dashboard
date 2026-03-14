@@ -1,0 +1,85 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# ----- Functions -----
+def open_receipts():
+    messagebox.showinfo("Receipts", "Opening Receipts Page")
+
+def open_delivery():
+    messagebox.showinfo("Delivery", "Opening Delivery Page")
+
+def open_products():
+    messagebox.showinfo("Products", "Opening Products Page")
+
+def open_history():
+    messagebox.showinfo("Move History", "Opening Stock History")
+
+# ----- Window -----
+root = tk.Tk()
+root.title("CoreInventory Dashboard")
+root.geometry("900x600")
+root.configure(bg="black")
+
+# ----- Top Menu -----
+menu_frame = tk.Frame(root, bg="#222", height=50)
+menu_frame.pack(fill="x")
+
+buttons = [
+    ("Dashboard", None),
+    ("Operations", None),
+    ("Products", open_products),
+    ("Move History", open_history),
+    ("Settings", None)
+]
+
+for text, cmd in buttons:
+    btn = tk.Button(menu_frame, text=text, command=cmd,
+                    bg="#444", fg="white", width=15)
+    btn.pack(side="left", padx=5, pady=10)
+
+# ----- Dashboard Title -----
+title = tk.Label(root, text="Dashboard", fg="white",
+                 bg="black", font=("Arial", 24))
+title.pack(pady=20)
+
+# ----- Main Cards Area -----
+cards_frame = tk.Frame(root, bg="black")
+cards_frame.pack(pady=20)
+
+# Receipt Card
+receipt_card = tk.Frame(cards_frame, bg="#1e1e1e",
+                        width=300, height=200, bd=2, relief="ridge")
+receipt_card.grid(row=0, column=0, padx=30)
+
+receipt_label = tk.Label(receipt_card, text="Receipts",
+                         fg="white", bg="#1e1e1e", font=("Arial", 16))
+receipt_label.pack(pady=10)
+
+receipt_btn = tk.Button(receipt_card, text="4 to Receive",
+                        command=open_receipts)
+receipt_btn.pack(pady=20)
+
+receipt_status = tk.Label(receipt_card,
+                          text="1 Late\n6 Operations",
+                          fg="white", bg="#1e1e1e")
+receipt_status.pack()
+
+# Delivery Card
+delivery_card = tk.Frame(cards_frame, bg="#1e1e1e",
+                         width=300, height=200, bd=2, relief="ridge")
+delivery_card.grid(row=0, column=1, padx=30)
+
+delivery_label = tk.Label(delivery_card, text="Delivery",
+                          fg="white", bg="#1e1e1e", font=("Arial", 16))
+delivery_label.pack(pady=10)
+
+delivery_btn = tk.Button(delivery_card, text="4 to Deliver",
+                         command=open_delivery)
+delivery_btn.pack(pady=20)
+
+delivery_status = tk.Label(delivery_card,
+                           text="1 Late\n2 Waiting\n6 Operations",
+                           fg="white", bg="#1e1e1e")
+delivery_status.pack()
+
+root.mainloop()
